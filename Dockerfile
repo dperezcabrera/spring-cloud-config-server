@@ -1,8 +1,13 @@
-FROM openjdk:8-jre-alpine 
+FROM maven:alpine AS builder
 MAINTAINER David Perez Cabrera, dperezcabrera@gmail.com
 
+COPY . /app/
+WORKDIR /app/
+RUN mvn package
+
+FROM openjdk:8-jre-alpine 
 EXPOSE 8888
-ADD /target/spring-cloud-config-server.jar /app/
+COPY --from=builder /app/target/spring-cloud-config-server.jar /app/
 ADD /config /app/config
 VOLUME /config
 WORKDIR /
