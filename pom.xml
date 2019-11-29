@@ -41,6 +41,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
+	    <version>${project.version}</version>
         </dependency>
     </dependencies>
     
